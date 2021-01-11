@@ -1,7 +1,8 @@
 import React, { createContext, useCallback, useState } from "react";
 import axios from "axios";
 
-export const AppContext = createContext();
+export const AppActionContext = createContext();
+export const AppStateContext = createContext();
 
 function ApiProvider({ children }) {
   const [state, mainSetState] = useState({
@@ -43,15 +44,16 @@ function ApiProvider({ children }) {
   }, []);
 
   return (
-    <AppContext.Provider
-      value={{
-        ...state,
-        authentication,
-        getMovies
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppStateContext.Provider value={{ ...state }}>
+      <AppActionContext.Provider
+        value={{
+          authentication,
+          getMovies
+        }}
+      >
+        {children}
+      </AppActionContext.Provider>
+    </AppStateContext.Provider>
   );
 }
 

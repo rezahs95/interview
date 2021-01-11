@@ -1,15 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import "./App.css";
-import { AppContext } from "./apiProvider";
-import Card from "./components/card";
-import Carousel from "./components/carousel";
+import { AppStateContext, AppActionContext } from "./providers/apiProvider";
+import Card from "./components/Card/card";
+import Carousel from "./components/Carousel/carousel";
 
 function App() {
-  const {
-    authentication,
-    getMovies,
-    dataSource
-  } = useContext(AppContext);
+  const { authentication, getMovies } = useContext(AppActionContext);
+  const { dataSource } = useContext(AppStateContext);
 
   useEffect(() => {
     authentication();
@@ -22,7 +19,7 @@ function App() {
         <div className="welcome">Welcome</div>
         <img
           className="profile-pic"
-          alt="Oops!"
+          alt="Profile"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5GVHWwqF-_gEZCa669SSiPiuiQV8DaH12AA&usqp=CAU"
         />
       </div>
